@@ -48,31 +48,11 @@ def generate_mp3_file(
 
     volume_flag = generate_flag(volume_percentage, 'volume', '%')
     playback_rate_flag = generate_flag(playback_rate_percentage, 'rate', '%')
-    pitch_flag = generate_pitch_flag(pitch_hz)
-
-    # Command to install the edge-tts package using pip
-    command_to_execute = ["pip", "install", "edge-tts"]
-    # Execute the command
-    try:
-        result = subprocess.run(command_to_execute, capture_output=True, text=True)
-        if result.returncode == 0:
-            print("edge-tts installed successfully.")
-        else:
-            print("Failed to install edge-tts:", result.stderr)
-    except Exception as e:
-        print("Error:", e)
-
-    command_to_execute = f"edge-{command}"
-    if shutil.which(command_to_execute) is not None:
-        print("'edge-tts' command is available in the PATH.")
-    else:
-        print("'edge-tts' command is not available in the PATH.")
-
-    tts_path = shutil.which(command_to_execute)
+    # pitch_flag = generate_pitch_flag(pitch_hz)
 
     command_to_execute = [
-        # "edge-tts",
-        tts_path,
+        "edge-tts",
+        # tts_path,
         "-f",
         f'"{input_text_file_path}"',
         "--write-media",
@@ -86,9 +66,6 @@ def generate_mp3_file(
 
     if playback_rate_flag != '':
         command_to_execute.append(playback_rate_flag)
-
-    if pitch_flag != '':
-        command_to_execute.append(pitch_flag)
 
     os_command = ' '.join(command_to_execute)
     print(os_command)
@@ -116,9 +93,9 @@ def generate_pitch_flag(variation_hz=0):
     if variation_hz == 0:
         return ""
 
-    #sign = "+" if variation_hz > 0 else "-"
-    return f'--pitch={variation_hz}hz'
-    #return f'--pitch={sign}{variation_hz}'
+    sign = "+" if variation_hz > 0 else "-"
+    # return f'--pitch={variation_hz}Hz'
+    return f'--pitch={sign}{variation_hz}Hz'
 
 
 

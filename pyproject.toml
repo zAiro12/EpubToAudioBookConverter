@@ -1,0 +1,14 @@
+[project]
+name = "epubtoaudiobookconverter"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "beautifulsoup4~=4.12.3",
+    "ctklistbox~=1.3",
+    "customtkinter~=5.2.2",
+    "ebooklib~=0.18",
+    "requests~=2.31.0",
+    "setuptools~=68.2.0",
+]
